@@ -5,7 +5,13 @@ on:
 
 jobs:
   build:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
+      - name: Configure builder
+        run: docker buildx create --use --driver=docker-container
       - name: Build
         run: docker buildx build --cache-from type=gha --cache-to type=gha,mode=max .
         
