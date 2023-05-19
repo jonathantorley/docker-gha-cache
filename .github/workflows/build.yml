@@ -11,10 +11,9 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v3 
-      - name: Configure builder
+      - name: Build
         run: |
           export ACTIONS_CACHE_URL=$(echo "$ACTIONS_ID_TOKEN_REQUEST_URL" | grep -Po 'https://[^/]+/[^/]+/' | sed  's/pipelines/artifactcache/')
           export ACTIONS_RUNTIME_TOKEN=$ACTIONS_ID_TOKEN_REQUEST_TOKEN
           docker buildx create --use --driver=docker-container
-      - name: Build
-        run: docker buildx build --cache-from type=gha --cache-to "type=gha,mode=max" --load .
+          docker buildx build --cache-from type=gha --cache-to "type=gha,mode=max" --load .
