@@ -1,0 +1,8 @@
+name: Build
+
+jobs:
+  build:
+    steps:
+      - name: Build
+        run: docker buildx build --cache-from type=gha --cache-to type=gha,mode=max .
+        
