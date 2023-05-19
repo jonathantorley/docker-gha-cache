@@ -17,4 +17,4 @@ jobs:
           export ACTIONS_RUNTIME_TOKEN=$ACTIONS_ID_TOKEN_REQUEST_TOKEN
           docker buildx create --use --driver=docker-container
       - name: Build
-        run: docker buildx build --cache-from type=gha --cache-to type=gha,mode=max .
+        run: docker buildx build --cache-from type=gha --cache-to "type=gha,mode=max" --load .
